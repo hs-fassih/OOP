@@ -11,7 +11,7 @@ private:
 public:
     player(int = 0, char = 'a', int[] = NULL, float = 0.0);
     float calAverage(void);
-    void print() const; // this is constant funation
+    void print() const; // this is constant function
     void setId(int);
     void setName(char);
     void setScores(int[]);

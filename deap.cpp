@@ -4,38 +4,38 @@ class Player
 {
 private:
     int id;
-    float scores[10];
+    float scores[10], *scores2;
 
 public:
-    Player();
-    void setid(int num);
+    Player()
+    {
+        scores2 = new float[10];
+        id = 5;
+    }
+    Player(Player &p);
+    void setid(int num)
+    {
+        id = num;
+    }
     int getid()
     {
         return id;
     }
-    operator int();
-    /*
     operator int()
     {
         cout << "inside operator int conversion:";
         return id;
     }
-    */
     friend void set(Player *P);
     friend ostream &operator<<(ostream &out, Player *P);
 };
-Player::Player()
+Player::Player(Player &P)
 {
-    id = 5;
-}
-Player::operator int()
-{
-    cout << "inside operator int conversion: ";
-    return id;
-}
-void Player::setid(int num)
-{
-    id = num;
+    for (int i = 0; i < 5; i++)
+    {
+        *(this->scores2 + i) = *(P.scores2 + i); // deep copy
+    }
+    // this->scores2 = P.scores2; // shallow copy
 }
 ostream &operator<<(ostream &out, Player *P)
 {
@@ -77,7 +77,7 @@ int main()
     Player p1;
     p1.setid(n);
 
-    cout << int(p1) << endl; //      from class type to integer type (or any other type you wants)
+    cout << int(p1); //      from class type to integer type (or any other type you wants)
 
     Player *p2 = new Player[5];
     for (int i = 0; i < 5; i++)
